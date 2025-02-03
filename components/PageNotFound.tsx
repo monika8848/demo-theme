@@ -24,8 +24,8 @@ function PageNotFound() {
               <br />
               <p className="font-poppins">Please try again later.</p>
             </p>
-            <button className={`btn btn-primary ${pageNotFoundStyles.error_button}`} onClick={() => router.push('/')}>
-              Back to Home
+            <button className={` ${pageNotFoundStyles.error_button} `} onClick={() => router.push('/')}>
+              <div className={`${pageNotFoundStyles.error_button_text} font-poppins`}>Back to Home</div>
             </button>
           </div>
         </div>

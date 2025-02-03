@@ -5,15 +5,27 @@ import Col from 'react-bootstrap/Col';
 
 const HomeBannerLoading = () => {
   return (
-    <Container fluid className="mt-3">
-      <Row className="justify-content-center">
-        <Col xs={12} md={12} lg={12}>
-          <Placeholder as="div" animation="glow">
-            <Placeholder className="w-100" style={{ height: '400px', borderRadius: '10px' }} />
-          </Placeholder>
-        </Col>
-      </Row>
-    </Container>
+    <>
+      <Container fluid className="d-none d-md-block">
+        <Row className="justify-content-center">
+          <Col xs={12} md={12} lg={12} className="px-0">
+            <Placeholder as="div" animation="glow">
+              <Placeholder className="w-100 " style={{ height: '700px' }} />
+            </Placeholder>
+          </Col>
+        </Row>
+      </Container>
+
+      <Container fluid className="d-block d-md-none">
+        <Row className="justify-content-center">
+          <Col xs={12} md={12} lg={12} className="px-0">
+            <Placeholder as="div" animation="glow">
+              <Placeholder className="w-100 " style={{ height: '250px' }} />
+            </Placeholder>
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 };
 
