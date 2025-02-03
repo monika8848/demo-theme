@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
             </p>
 
             <button className={`${ErrorBoundaryStyles.error_button} mt-4`} onClick={() => location.reload()}>
-              <div className={`${ErrorBoundaryStyles.error_button_text} font-poppins`}>Refresh</div>
+              <div className={`${ErrorBoundaryStyles.error_button_text} font-poppins`}>Refresh Page</div>
             </button>
           </div>
         </div>
