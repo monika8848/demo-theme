@@ -8,8 +8,12 @@ const NavbarLoader = () => {
       <nav>
         <div className="d-flex justify-content-between align-items-center">
           {/* Logo Placeholder */}
-          <Placeholder animation="glow">
+          <Placeholder animation="glow" className="d-none d-md-block">
             <Placeholder xs={12} style={{ height: '58px', width: '248px' }} />
+          </Placeholder>
+
+          <Placeholder animation="glow" className="d-block d-md-none">
+            <Placeholder xs={12} style={{ height: '58px', width: '158px' }} />
           </Placeholder>
 
           {/* Navigation Links Placeholder */}

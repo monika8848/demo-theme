@@ -22,13 +22,13 @@ const BlogSectionCarousel = ({ blogData }: any) => {
   };
   return (
     <>
-      <div className={`${styles.featuredCollectionTitle} text-center fw-bold w-100 mt-3`}>
+      <div className={`${styles.featuredCollectionTitle} text-center fw-bold w-100 mt-5`}>
         <span className={styles.horizontal_line}></span>
         <span className=" text-center  font-poppins text-uppercase px-2">From The Blogs</span>
         <span className={styles.horizontal_line}></span>
       </div>
       <h6 className="text-secondary text-center mb-4 px-2 fs-14">The freshest and most exciting news</h6>
-      <div className={`${styles.carousel_blog_container} mb-5`}>
+      <div className={`${styles.carousel_blog_container} mb-5 px-2`}>
         <Carousel
           responsive={responsive}
           infinite={true}
@@ -49,7 +49,7 @@ const BlogSectionCarousel = ({ blogData }: any) => {
           }
         >
           {blogData?.map((blog: any, index: number) => (
-            <div key={index} className={styles.carousel_blog_card}>
+            <div key={index} className={`${styles.carousel_blog_card} `}>
               <div className={styles.carousel_blog_banner_image_container}>
                 <Image
                   src={blog.custom_image}
@@ -57,7 +57,7 @@ const BlogSectionCarousel = ({ blogData }: any) => {
                   alt="blog-image"
                   className={`w-100 cursor-pointer ${styles.carousel_blog_banner_image}`}
                   width={100}
-                  height={277.5}
+                  height={258}
                   objectFit="cover"
                   loading="eager"
                   priority={true}
@@ -65,7 +65,7 @@ const BlogSectionCarousel = ({ blogData }: any) => {
               </div>
               <div className="mt-3">
                 <p className={`m-0 mb-1 ${styles.blog_heading2} font-poppins`}>{blog?.title}</p>
-                <p className={`${styles.blog_heading1} m-0 mb-3`}>
+                <p className={`${styles.blog_heading1} m-0`}>
                   <span className="text-secondary">By</span> admin <span className="text-secondary">on</span>{' '}
                   {dateFormat(blog?.published_on)}
                 </p>

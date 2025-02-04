@@ -31,6 +31,27 @@ function CustomProductCategoriesNavbar({
     setShowPopoverIndex((prevIndex) => (prevIndex === index ? null : index)); // Toggle popover
   };
 
+  const skeletonLoader = (
+    <div className="py-3">
+      <Placeholder animation="glow">
+        <Placeholder xs={6} style={{ height: '20px', width: '20%' }} />
+      </Placeholder>
+
+      <hr style={{ width: '30%' }} />
+      {[1, 2, 3].map((item: any) => (
+        <div className="mt-1">
+          <Placeholder animation="glow">
+            <Placeholder xs={6} style={{ height: '20px', width: '25%' }} />
+          </Placeholder>
+        </div>
+      ))}
+
+      <Placeholder as="div" animation="wave" className="mb-2" style={{ width: '80%' }} />
+      <Placeholder as="div" animation="wave" className="mb-2" style={{ width: '60%' }} />
+      <Placeholder as="div" animation="wave" style={{ width: '90%' }} />
+    </div>
+  );
+
   const popoverBottom = (item: any) => (
     <Popover
       id={`popover-${item.label}`}
@@ -47,51 +68,55 @@ function CustomProductCategoriesNavbar({
         zIndex: 1050, // Ensure it's above other elements
       }}
     >
-      <div className="row">
-        {item?.values?.length > 0 &&
-          item?.values.map((itemL2: any, index: number) => {
-            const columnCount = Math.ceil(itemL2?.values?.length / 8);
-            return (
-              <div key={index} className="col">
-                <div className={` w-25`}>
-                  <Link
-                    href={{
-                      pathname: `${itemL2?.url}`,
-                      query: { page: '1', currency: 'INR' },
-                    }}
-                    prefetch={true}
-                    className={`label text-dark text-decoration-none ${stylesHeader.heading_category_custom_l2}`}
-                    onClick={() => setShowPopoverIndex(null)}
-                  >
-                    {itemL2?.label}
-                  </Link>
-                  <hr className="grey" />
+      {isLoading ? (
+        skeletonLoader
+      ) : (
+        <div className="row">
+          {item?.values?.length > 0 &&
+            item?.values.map((itemL2: any, index: number) => {
+              const columnCount = Math.ceil(itemL2?.values?.length / 8);
+              return (
+                <div key={index} className="col">
+                  <div className={` w-25`}>
+                    <Link
+                      href={{
+                        pathname: `${itemL2?.url}`,
+                        query: { page: '1', currency: 'INR' },
+                      }}
+                      prefetch={true}
+                      className={`label text-dark text-decoration-none ${stylesHeader.heading_category_custom_l2}`}
+                      onClick={() => setShowPopoverIndex(null)}
+                    >
+                      {itemL2?.label}
+                    </Link>
+                    <hr className="grey" />
+                  </div>
+                  <div className={stylesHeader.col_container}>
+                    {Array.from({ length: columnCount }, (_, columnIndex) => (
+                      <div key={columnIndex} className={stylesHeader.column}>
+                        {itemL2?.values?.slice(columnIndex * 8, (columnIndex + 1) * 8).map((itemL3: any, idx: number) => (
+                          <div key={idx} className={`pb-3 ${stylesHeader.sub_menu}`}>
+                            <Link
+                              href={{
+                                pathname: `${itemL3?.url}`,
+                                query: { page: '1', currency: 'INR' },
+                              }}
+                              prefetch={true}
+                              className={`${stylesHeader.heading_category_custom_l3} `}
+                              onClick={() => setShowPopoverIndex(null)}
+                            >
+                              {itemL3?.label !== undefined ? itemL3?.label : `${idx}`}
+                            </Link>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className={stylesHeader.col_container}>
-                  {Array.from({ length: columnCount }, (_, columnIndex) => (
-                    <div key={columnIndex} className={stylesHeader.column}>
-                      {itemL2?.values?.slice(columnIndex * 8, (columnIndex + 1) * 8).map((itemL3: any, idx: number) => (
-                        <div key={idx} className={`pb-3 ${stylesHeader.sub_menu}`}>
-                          <Link
-                            href={{
-                              pathname: `${itemL3?.url}`,
-                              query: { page: '1', currency: 'INR' },
-                            }}
-                            prefetch={true}
-                            className={`${stylesHeader.heading_category_custom_l3} `}
-                            onClick={() => setShowPopoverIndex(null)}
-                          >
-                            {itemL3?.label !== undefined ? itemL3?.label : `${idx}`}
-                          </Link>
-                        </div>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-      </div>
+              );
+            })}
+        </div>
+      )}
     </Popover>
   );
 
